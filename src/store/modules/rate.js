@@ -4,6 +4,7 @@ export default {
       const cachedRates = JSON.parse(localStorage.getItem(currency));
       const currentTime = Date.now();
       let response;
+
       if (cachedRates && cachedRates.expires > currentTime) {
         response = cachedRates.data;
       } else {

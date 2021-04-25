@@ -188,6 +188,17 @@ export default {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+@media all and (max-width: 425px) {
+  .converter {
+    padding: 10px 15px 20px;
+  }
+  .converter__row {
+    flex-direction: column;
+  }
+  .converter__select {
+    margin: 10px 0;
+  }
+}
 .converter__select,
 .converter__input,
 .converter__switch-button {

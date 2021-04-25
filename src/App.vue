@@ -26,7 +26,7 @@ export default {
 }
 body {
   margin: 0;
-  background: lightblue;
+  background: linear-gradient(to bottom, #11998e, #38ef7d);
 }
 #app {
   box-sizing: border-box;
