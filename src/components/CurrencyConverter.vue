@@ -208,7 +208,7 @@ export default {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-@media all and (max-width: 425px) {
+@media all and (max-width: 480px) {
   .converter {
     padding: 10px 15px 20px;
   }
