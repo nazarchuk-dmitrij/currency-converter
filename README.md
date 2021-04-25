@@ -18,6 +18,8 @@ Things that I would have done if I had more time to work on this application:
 - Write unit tests
 - Refactor CSS, by, among other things, using custom variables
 
+PS: I thought about adding flags for each currencies beforehand, so I prepared sprite and classes for each flag one day before I started working on this task. That's why it took me like 15 minutes to add Flag component to this app - because I already had sprite and classes prepared.
+
 ## Project setup
 ```
 npm install
