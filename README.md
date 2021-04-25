@@ -12,7 +12,7 @@ I had big plans for this application, but during the course of development, I ha
 
 Things that I would have done if I had more time to work on this application:
 - Add some kind of validation of user's input
-- Add better error handling for API (remembered about it during writing this paragraph)
+- Add better error handling for API (remembered about it during writing of this paragraph)
 - Broke down CurrencyConverter to more child components
 - Add option to check exchange rate from the past
 - Write unit tests
