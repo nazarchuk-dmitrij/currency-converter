@@ -7,6 +7,7 @@
         name="currencyFromSelect"
         v-model="currencyFrom"
         class="converter__select"
+        v-on:change="updateRates(currencyFrom)"
       >
         <option
           v-for="currency in currencies"
@@ -58,6 +59,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -102,8 +105,9 @@ export default {
       ],
     };
   },
-  computed: {},
+  computed: mapGetters(["allRates"]),
   methods: {
+    ...mapActions(["fetchRates"]),
     switchCurrencies: function () {
       const oldCurrencyFrom = this.currencyFrom;
       const oldCurrencyFromAmount = this.currencyFromAmount;
@@ -111,7 +115,14 @@ export default {
       this.currencyTo = oldCurrencyFrom;
       this.currencyFromAmount = this.currencyToAmount;
       this.currencyToAmount = oldCurrencyFromAmount;
+      this.fetchRates(this.currencyFrom);
     },
+    updateRates: function (currencyFrom) {
+      this.fetchRates(currencyFrom);
+    },
+  },
+  async mounted() {
+    this.fetchRates();
   },
 };
 </script>
