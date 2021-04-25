@@ -79,6 +79,9 @@ export default {
       currencyTo: "USD",
       currencyFromAmount: "",
       currencyToAmount: "",
+      /* probably should have gotten this array from API request,
+         but don't have time anymore to change that
+      */
       currencies: [
         "EUR",
         "USD",
