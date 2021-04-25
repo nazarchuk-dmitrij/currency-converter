@@ -22,6 +22,7 @@
         v-model="currencyFromAmount"
         placeholder="100"
         class="converter__input"
+        v-on:keyup="convertCurrencyFrom"
       />
     </div>
 
@@ -39,6 +40,7 @@
         name="currencyToSelect"
         v-model="currencyTo"
         class="converter__select"
+        v-on:change="updateRates(currencyFrom)"
       >
         <option
           v-for="currency in currencies"
@@ -53,6 +55,7 @@
         v-model="currencyToAmount"
         placeholder="120"
         class="converter__input"
+        v-on:keyup="convertCurrencyTo"
       />
     </div>
   </div>
@@ -119,6 +122,29 @@ export default {
     },
     updateRates: function (currencyFrom) {
       this.fetchRates(currencyFrom);
+      this.convertCurrencyFrom();
+    },
+    convertCurrencyFrom() {
+      this.currencyToAmount = this.calculateConversion(
+        this.currencyFrom,
+        this.currencyTo,
+        this.currencyFromAmount
+      );
+    },
+    convertCurrencyTo() {
+      this.currencyFromAmount = this.calculateConversion(
+        this.currencyTo,
+        this.currencyFrom,
+        this.currencyToAmount
+      );
+    },
+    calculateConversion(sourceCurrency, targetCurrency, sourceAmount) {
+      const rates = this.allRates.rates;
+      const result =
+        this.allRates.base === sourceCurrency
+          ? sourceAmount * rates[targetCurrency]
+          : sourceAmount / rates[sourceCurrency];
+      return result.toFixed(2);
     },
   },
   async mounted() {
