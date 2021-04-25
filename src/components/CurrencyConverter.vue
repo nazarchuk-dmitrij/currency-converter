@@ -3,20 +3,23 @@
     <h2 class="converter__heading">Currency Converter</h2>
     <div class="converter__row">
       <span class="converter__title">From</span>
-      <select
-        name="currencyFromSelect"
-        v-model="currencyFrom"
-        class="converter__select"
-        v-on:change="updateRates(currencyFrom)"
-      >
-        <option
-          v-for="currency in currencies"
-          :key="currency"
-          :value="currency"
+      <div class="converter__currency-item">
+        <Flag :currency="currencyFrom" />
+        <select
+          name="currencyFromSelect"
+          v-model="currencyFrom"
+          class="converter__select"
+          v-on:change="updateRates(currencyFrom)"
         >
-          {{ currency }}
-        </option>
-      </select>
+          <option
+            v-for="currency in currencies"
+            :key="currency"
+            :value="currency"
+          >
+            {{ currency }}
+          </option>
+        </select>
+      </div>
       <input
         type="text"
         v-model="currencyFromAmount"
@@ -36,20 +39,23 @@
 
     <div class="converter__row">
       <span class="converter__title">To</span>
-      <select
-        name="currencyToSelect"
-        v-model="currencyTo"
-        class="converter__select"
-        v-on:change="updateRates(currencyFrom)"
-      >
-        <option
-          v-for="currency in currencies"
-          :key="currency"
-          :value="currency"
+      <div class="converter__currency-item">
+        <Flag :currency="currencyTo" />
+        <select
+          name="currencyToSelect"
+          v-model="currencyTo"
+          class="converter__select"
+          v-on:change="updateRates(currencyFrom)"
         >
-          {{ currency }}
-        </option>
-      </select>
+          <option
+            v-for="currency in currencies"
+            :key="currency"
+            :value="currency"
+          >
+            {{ currency }}
+          </option>
+        </select>
+      </div>
       <input
         type="text"
         v-model="currencyToAmount"
@@ -63,8 +69,10 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import Flag from "./Flag";
 
 export default {
+  components: { Flag },
   data() {
     return {
       currencyFrom: "EUR",
@@ -182,6 +190,10 @@ export default {
 }
 .converter__title {
   width: 50px;
+}
+.converter__currency-item {
+  display: flex;
+  align-items: center;
 }
 .converter__select {
   margin-right: 15px;
