@@ -150,12 +150,17 @@ export default {
       );
     },
     calculateConversion(sourceCurrency, targetCurrency, sourceAmount) {
-      const rates = this.allRates.rates;
-      const result =
-        this.allRates.base === sourceCurrency
-          ? sourceAmount * rates[targetCurrency]
-          : sourceAmount / rates[sourceCurrency];
-      return result.toFixed(2);
+      if (this.allRates && this.allRates.rates) {
+        const rates = this.allRates.rates;
+        const result =
+          this.allRates.base === sourceCurrency
+            ? sourceAmount * rates[targetCurrency]
+            : sourceAmount / rates[sourceCurrency];
+        return result.toFixed(2);
+      } else {
+        console.log("Could not fetch exchange rate");
+        return 0;
+      }
     },
   },
   async mounted() {

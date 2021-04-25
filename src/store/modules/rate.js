@@ -10,8 +10,15 @@ export default {
       } else {
         const data = await fetch(
           "https://api.ratesapi.io/api/latest?base=" + currency
-        );
-        response = await data.json();
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+        response = await data;
 
         // Caching response in localStorage for one hour
         const expireTime = 60 * 60 * 1000;
