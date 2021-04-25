@@ -1,8 +1,21 @@
 <template>
   <div class="converter">
+    <h2 class="converter__heading">Currency Converter</h2>
     <div class="converter__row">
       <span class="converter__title">From</span>
-      <input type="button" v-model="currencyFrom" class="converter__button" />
+      <select
+        name="currencyFromSelect"
+        v-model="currencyFrom"
+        class="converter__select"
+      >
+        <option
+          v-for="currency in currencies"
+          :key="currency"
+          :value="currency"
+        >
+          {{ currency }}
+        </option>
+      </select>
       <input
         type="text"
         v-model="currencyFromAmount"
@@ -11,9 +24,29 @@
       />
     </div>
 
+    <button
+      class="converter__switch-button"
+      type="button"
+      v-on:click="switchCurrencies"
+    >
+      Switch
+    </button>
+
     <div class="converter__row">
       <span class="converter__title">To</span>
-      <input type="button" v-model="currencyTo" class="converter__button" />
+      <select
+        name="currencyToSelect"
+        v-model="currencyTo"
+        class="converter__select"
+      >
+        <option
+          v-for="currency in currencies"
+          :key="currency"
+          :value="currency"
+        >
+          {{ currency }}
+        </option>
+      </select>
       <input
         type="text"
         v-model="currencyToAmount"
@@ -32,9 +65,54 @@ export default {
       currencyTo: "USD",
       currencyFromAmount: "",
       currencyToAmount: "",
+      currencies: [
+        "EUR",
+        "USD",
+        "GBP",
+        "HKD",
+        "IDR",
+        "ILS",
+        "DKK",
+        "INR",
+        "CHF",
+        "MXN",
+        "CZK",
+        "SGD",
+        "THB",
+        "HRK",
+        "MYR",
+        "NOK",
+        "CNY",
+        "BGN",
+        "PHP",
+        "SEK",
+        "PLN",
+        "ZAR",
+        "CAD",
+        "ISK",
+        "BRL",
+        "RON",
+        "NZD",
+        "TRY",
+        "JPY",
+        "RUB",
+        "KRW",
+        "HUF",
+        "AUD",
+      ],
     };
   },
-  methods: {},
+  computed: {},
+  methods: {
+    switchCurrencies: function () {
+      const oldCurrencyFrom = this.currencyFrom;
+      const oldCurrencyFromAmount = this.currencyFromAmount;
+      this.currencyFrom = this.currencyTo;
+      this.currencyTo = oldCurrencyFrom;
+      this.currencyFromAmount = this.currencyToAmount;
+      this.currencyToAmount = oldCurrencyFromAmount;
+    },
+  },
 };
 </script>
 
@@ -43,26 +121,53 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px;
+  padding: 10px 40px 40px;
   background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px #555;
+}
+.converter__heading {
+  margin-bottom: 15px;
 }
 .converter__row {
   display: flex;
   width: 100%;
   align-items: center;
 }
-.converter__row:first-of-type {
-  margin-bottom: 20px;
+.converter__switch-button {
+  width: 120px;
+  margin: 20px 0;
+  padding: 5px;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 5px;
 }
 .converter__title {
   width: 50px;
 }
-.converter__button {
-  width: 80px;
-  padding: 5px;
+.converter__select {
   margin-right: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+.converter__select,
+.converter__input,
+.converter__switch-button {
+  height: 2em;
+  font-size: 1em;
+  line-height: 1.2em;
+  outline: none;
+}
+.converter__select:hover,
+.converter__input:hover,
+.converter__switch-button:hover {
+  box-shadow: 0px 0px 3px 1px #aaa;
+}
+.converter__select:focus,
+.converter__input:focus,
+.converter__switch-button:focus {
+  border-color: #000;
 }
 .converter__input {
   padding: 5px;
