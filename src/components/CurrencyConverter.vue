@@ -207,6 +207,7 @@ export default {
   margin-right: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 65px;
 }
 @media all and (max-width: 480px) {
   .converter {
