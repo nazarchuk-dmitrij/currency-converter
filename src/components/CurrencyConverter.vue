@@ -1,6 +1,7 @@
 <template>
   <div class="converter">
     <h2 class="converter__heading">Currency Converter</h2>
+    <ErrorNotification />
     <div class="converter__row">
       <span class="converter__title">From</span>
       <div class="converter__currency-item">
@@ -69,10 +70,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import ErrorNotification from "./ErrorNotification";
 import Flag from "./Flag";
 
 export default {
-  components: { Flag },
+  components: { Flag, ErrorNotification },
   data() {
     return {
       currencyFrom: "EUR",
