@@ -1,6 +1,6 @@
 export default {
   actions: {
-    async fetchRates({ commit }, currency = "EUR") {
+    async fetchRates({ commit, state }, currency = "EUR") {
       const cachedRates = JSON.parse(localStorage.getItem(currency));
       const currentTime = Date.now();
       let response;
@@ -8,9 +8,7 @@ export default {
       if (cachedRates && cachedRates.expires > currentTime) {
         response = cachedRates.data;
       } else {
-        const data = await fetch(
-          "https://api.ratesapi.io/api/latest?base=" + currency
-        )
+        const data = await fetch(state.apiURL + "?base=" + currency)
           .then((response) => {
             return response.json();
           })
@@ -42,6 +40,7 @@ export default {
   },
   state: {
     rates: [],
+    apiURL: "https://api.exchangerate.host/latest",
   },
   getters: {
     allRates(state) {
