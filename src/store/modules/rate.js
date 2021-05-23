@@ -17,7 +17,7 @@ export default {
           )
           .then((res) => {
             if (res.ok) return res.json();
-            throw new Error(`Something went wrong. Error ${res.status}.`);
+            throw new Error(`Error: ${res.status}.`);
           });
 
           data = await response;
