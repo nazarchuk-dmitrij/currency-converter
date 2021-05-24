@@ -12,7 +12,7 @@ export default {
       } else {
         try {
           let getBaseUrl = state.apiUrl + "?base=" + currency;
-          const response = await fetch(
+          data = await fetch(
             getBaseUrl
           )
           .then((res) => {
@@ -20,7 +20,6 @@ export default {
             throw new Error(`Error: ${res.status}.`);
           });
 
-          data = await response;
           dispatch("cacheRates", { currency, data, currentTime });
 
           commit("SET_ERROR", false);
